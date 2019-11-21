@@ -368,7 +368,13 @@ const transformAST = {
   },
 
   StructDefinition(ctx) {
+    let natspec = null
+    if (ctx.natSpec()) {
+      natspec = parseComments(toText(ctx.getChild(0)))
+    }
+
     return {
+      natspec,
       name: toText(ctx.identifier()),
       members: this.visit(ctx.variableDeclaration())
     }
@@ -496,12 +502,18 @@ const transformAST = {
   },
 
   ModifierDefinition(ctx) {
+    let natspec = null
+    if (ctx.natSpec()) {
+      natspec = parseComments(toText(ctx.getChild(0)))
+    }
+
     let parameters = null
     if (ctx.parameterList()) {
       parameters = this.visit(ctx.parameterList())
     }
 
     return {
+      natspec,
       name: toText(ctx.identifier()),
       parameters,
       body: this.visit(ctx.block())

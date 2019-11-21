@@ -470,6 +470,7 @@ describe('AST', () => {
     assert.deepEqual(ast, {
       "type": "StructDefinition",
       "name": "hello",
+      "natspec": null,
       "members": [
         {
           "type": "VariableDeclaration",
@@ -683,6 +684,7 @@ describe('AST', () => {
     assert.deepEqual(ast, {
       "type": "ModifierDefinition",
       "name": "onlyOwner",
+      "natspec": null,
       "parameters": null,
       "body": {
         "type": "Block",
@@ -693,6 +695,7 @@ describe('AST', () => {
     assert.deepEqual(ast, {
       "type": "ModifierDefinition",
       "name": "onlyOwner",
+      "natspec": null,
       "parameters": [],
       "body": {
         "type": "Block",
@@ -1577,6 +1580,7 @@ contract Sum { }`
       },
     })
   })
+
   it("NatSpec multi line multiple functions in contract", function () {
     const ast = parser.parse(
 `/**
@@ -1613,5 +1617,33 @@ contract Sum { }`
       },
       return: 'the approved amount',
     });
+  })
+
+  it("NatSpec multi line modifier", function() {
+    var ast = parseNode(`/**
+    * @dev The onlyOwner modifier
+    * @param user the user
+    */
+   modifier onlyOwner(address user) {}`)
+    assert.deepEqual(ast.natspec, {
+      dev: 'The onlyOwner modifier',
+      params: {
+        user: 'the user',
+      },
+    })
+  })
+
+  it("NatSpec multi line struct", function() {
+    var ast = parseNode(`/**
+    * @dev The hello struct
+    * @param a the variable a
+    */
+   struct hello { uint a; }`)
+    assert.deepEqual(ast.natspec, {
+      dev: 'The hello struct',
+      params: {
+        a: 'the variable a',
+      },
+    })
   })
 })
