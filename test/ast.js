@@ -147,6 +147,7 @@ describe('AST', () => {
     assert.deepEqual(ast, {
       "type": "FunctionDefinition",
       "name": null,
+      "natspec": null,
       "parameters": [
         {
           "type": "VariableDeclaration",
@@ -1641,6 +1642,20 @@ contract Sum { }`
    struct hello { uint a; }`)
     assert.deepEqual(ast.natspec, {
       dev: 'The hello struct',
+      params: {
+        a: 'the variable a',
+      },
+    })
+  })
+
+  it("NatSpec multi line constructor", function() {
+    var ast = parseNode(`/**
+    * @dev The hello constructor
+    * @param a the variable a
+    */
+   constructor(uint256 a) public { }`)
+    assert.deepEqual(ast.natspec, {
+      dev: 'The hello constructor',
       params: {
         a: 'the variable a',
       },

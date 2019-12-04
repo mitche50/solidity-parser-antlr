@@ -152,6 +152,11 @@ const transformAST = {
   },
 
   ConstructorDefinition(ctx) {
+    let natspec = null
+    if (ctx.natSpec()) {
+      natspec = parseComments(toText(ctx.getChild(0)))
+    }
+
     const parameters = this.visit(ctx.parameterList())
     const block = this.visit(ctx.block())
 
@@ -180,6 +185,7 @@ const transformAST = {
     return {
       type: 'FunctionDefinition',
       name: null,
+      natspec,
       parameters,
       body: block,
       visibility,
