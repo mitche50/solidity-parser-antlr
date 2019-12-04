@@ -1661,4 +1661,21 @@ contract Sum { }`
       },
     })
   })
+
+  it("NatSpec multi line single natspec constructor", function() {
+    var ast = parseNode(`/**
+    * @dev The hello constructor
+    *
+    * Guess what? Will keep multiline
+    * @param a the variable a
+    * Same as this one here tho!
+    */
+   constructor(uint256 a) public { }`)
+    assert.deepEqual(ast.natspec, {
+      dev: 'The hello constructor\n\nGuess what? Will keep multiline',
+      params: {
+        a: 'the variable a\nSame as this one here tho!',
+      },
+    })
+  })
 })

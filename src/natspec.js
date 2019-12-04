@@ -9,6 +9,7 @@ module.exports = function (comment) {
     // if it is a multiline, remove line breaks, "/**"" (the comment begin)
     // "*/"" (the comment end), and "* @" at the begining of each comment
     comment = comment.replace(/(\r|\n|\/\*\*|\*\/|\*(?=[ ]?@))/g, '');
+    comment = comment.replace(/\n?[ ]+\*[ ]+?/g, '\n');
   } else if (comment.substring(0, 3) === '///') {
     // if it is a single line,
     // remove just line breakers and "///" (the comment begin)
