@@ -690,8 +690,13 @@ const transformAST = {
     const name = toText(iden)
 
     let expression = null
+    let natspec = null
     if (ctx.expression()) {
       expression = this.visit(ctx.expression())
+    }
+
+    if (ctx.natSpec()) {
+      natspec = parseComments(toText(ctx.getChild(0)))
     }
 
     let visibility = 'default'
@@ -724,7 +729,8 @@ const transformAST = {
 
     return {
       variables: [decl],
-      initialValue: expression
+      initialValue: expression,
+      natspec
     }
   },
 

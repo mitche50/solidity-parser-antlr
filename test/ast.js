@@ -799,7 +799,8 @@ describe('AST', () => {
           "isIndexed": false
         }
       ],
-      "initialValue": null
+      "initialValue": null,
+      "natspec": null
     })
   })
 
@@ -1676,6 +1677,25 @@ contract Sum { }`
       params: {
         a: 'the variable a\nSame as this one here tho!',
       },
+    })
+  })
+
+  it("NatSpec single line single natspec variable", function() {
+    var ast = parseNode(`
+    /// @dev This is a comment for a variable
+    uint256 internal myvar;`)
+    assert.deepEqual(ast.natspec, {
+      dev: 'This is a comment for a variable',
+    })
+  })
+
+   it("NatSpec multi line single natspec variable", function() {
+    var ast = parseNode(`/**
+    * @dev This is a comment for a variable
+    */
+   mapping (bytes32 => uint256) internal myvar;`)
+    assert.deepEqual(ast.natspec, {
+      dev: 'This is a comment for a variable',
     })
   })
 })
