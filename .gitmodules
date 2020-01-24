@@ -1,4 +1,4 @@
 [submodule "solidity-antlr4"]
 	path = solidity-antlr4
-	url = https://github.com/obernardovieira/solidity-antlr4
+	url = https://github.com/HQ20/solidity-antlr4
 	branch = dev
