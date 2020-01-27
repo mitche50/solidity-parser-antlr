@@ -1,5 +1,5 @@
 {
-  "name": "solidity-parser-antlr",
+  "name": "@hq20/solidity-parser-antlr",
   "version": "0.4.11",
   "description": "A Solidity parser built from a robust ANTLR 4 grammar",
   "main": "dist/index.js",
@@ -18,7 +18,7 @@
   "homepage": "https://github.com/federicobond/solidity-parser-antlr",
   "repository": {
     "type": "git",
-    "url": "https://github.com/federicobond/solidity-parser-antlr.git"
+    "url": "https://github.com/hq20/solidity-parser-antlr.git"
   },
   "license": "MIT",
   "devDependencies": {
