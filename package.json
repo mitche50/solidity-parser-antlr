@@ -1,6 +1,6 @@
 {
   "name": "@hq20/solidity-parser-antlr",
-  "version": "0.4.11",
+  "version": "0.4.12-alpha.0",
   "description": "A Solidity parser built from a robust ANTLR 4 grammar",
   "main": "dist/index.js",
   "types": "./index.d.ts",
