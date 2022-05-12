@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Parse a full text comment to an object that can be easly consumed
  * @param comment full text comment
@@ -19,25 +17,25 @@ module.exports = function (comment) {
   }
 
   // split text by comment type
-  var splitComments = comment.split(/@(title|author|notice|dev|param|return)/g);
+  const splitComments = comment.split(/@(title|author|notice|dev|param|return)/g);
   // let's start a map
-  var resultComments = {};
+  const resultComments = {};
 
   // iterate through all the split comments
   // start in the second result (because the first one is usually nothing)
   // then iterate each two elements, because since the split is done using
   // the natspec type
-  for (var x = 1; x < splitComments.length; x += 2) {
+  for (let x = 1; x < splitComments.length; x += 2) {
 
-    var key = splitComments[x];
-    var value = splitComments[x + 1].trim();
+    const key = splitComments[x];
+    const value = splitComments[x + 1].trim();
 
     // if the comment if type 'param' we need to extract the first word
     // which is the variable name
     if (key === 'param') {
-      var sep = value.indexOf(' ');
-      var paramName = value.substring(0, sep);
-      var paramValue = value.substring(sep + 1);
+      const sep = value.indexOf(' ');
+      const paramName = value.substring(0, sep);
+      const paramValue = value.substring(sep + 1);
 
       if (resultComments['params'] == null) {
         resultComments['params'] = {};
@@ -45,9 +43,9 @@ module.exports = function (comment) {
 
       resultComments['params'][paramName] = paramValue;
     } if (key === 'return') {
-      var sep = value.indexOf(' ');
-      var returnName = value.substring(0, sep);
-      var returnValue = value.substring(sep + 1);
+      const sep = value.indexOf(' ');
+      const returnName = value.substring(0, sep);
+      const returnValue = value.substring(sep + 1);
 
       if (resultComments['return'] == null) {
         resultComments['return'] = {};
